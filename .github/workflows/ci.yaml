@@ -13,7 +13,7 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
+          username: ${{ vars.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Set up Docker Buildx
@@ -22,7 +22,7 @@ jobs:
       - name: Build and push
         env:
           REPO_NAME: ${{ vars.REPO_NAME }}
-          DOCKER_HUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
+          DOCKER_HUB_USERNAME: ${{ vars.DOCKER_HUB_USERNAME }}
         run: |
           - echo "Building and pushing docker image..."
           - REGISTRY_USER=$DOCKER_HUB_USERNAME REPO_NAME=$REPO_NAME docker buildx bake -f docker-bake.hcl --push
